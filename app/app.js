@@ -1,5 +1,7 @@
 "use strict";
 
+//서버 열때 꼭 app으로 경로 이동한 후에 npm start 하시길!!
+
 //모듈
 const express = require('express');
 const app = express();
