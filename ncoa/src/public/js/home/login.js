@@ -32,7 +32,22 @@ function login() {
 //프론트 엔드에서 body로 req데이터를 전달을 했으며 home.ctrl.js에서 process객체에서 받음
 	}).then((res) => res.json()) 
 //반환값을 전달을 해줘야함
-	  .then(console.log);
+	  .then((res) => {
+		if (res.success){
+//res가 success면
+			location.href = "/";
+//경로 "/"로 이동하고
+		} else{
+			alert(res.msg);
+//res가 false면 msg를 띄운다
+		}
+	})
+	.catch((err) => {
+		console.error(new Error("로그인 중 에러 발생"));
+	});
+	//로그인중에 에러가 발생하면 확인할수 있게 fetch끝에 .catch를 붙여주면 됨
+	//ex) index.js에서 라우터를 지워버리면 전달할 경로가 없어져서 에러가 발생함
+	//new error를 쓰면 로그인 중 에러 발생 앞에 "Error:" 라고 뜸
 //id랑 pw의 해당하는 데이터를 서버에 전달하는거 ()안에 있는거는 경로 어떤 경로로 아이디랑 비밀번호를 보내줄 건지
 //fetch에서 전달을 해서 다시 서버에서 받을려면 fetch끝에 then이라는 메소드르 붙여서 res라는 데이터가 => (파라미터로 전달 되고)
 //res.json()의 반환 값은 promise임 기본 res의 반환 값은 response스트림(뜻: 데이터를 사용자에게 지속적으로 적은 양의)인데, ".json()"메서드를 통해 response스트림을 읽을수 있다. ".json()"으로 response스트림을 가져와 완료될 때까지 읽는다. 다읽은 body의 텍스트를 promise 형태로 반환한다.
